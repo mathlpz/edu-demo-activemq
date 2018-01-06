@@ -1,0 +1,90 @@
+[INFO ][20171224 08:44:39,357][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@47ef968d: startup date [Sun Dec 24 08:44:39 CST 2017]; root of context hierarchy
+[INFO ][20171224 08:44:39,526][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-context.xml]
+[INFO ][20171224 08:44:40,458][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-mq.xml]
+[INFO ][20171224 08:44:40,738][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq.properties]
+[INFO ][20171224 08:44:40,879][DefaultListableBeanFactory:598] Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@35aea049: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,mqProducer,org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.aop.config.internalAutoProxyCreator,targetConnectionFactory,pooledConnectionFactory,connectionFactory,activeMqJmsTemplate,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+[ERROR][20171224 08:44:41,299][MQProducerTest:36] ==>MQ context start error:
+org.springframework.jms.UncategorizedJmsException: Uncategorized exception occured during JMS processing; nested exception is javax.jms.JMSException: Error while attempting to add new Connection to the pool; nested exception is javax.jms.JMSException: Could not connect to broker URL: tcp://http://192.168.220.128:61616. Reason: java.lang.IllegalArgumentException: port out of range:-1
+	at org.springframework.jms.support.JmsUtils.convertJmsAccessException(JmsUtils.java:316)
+	at org.springframework.jms.support.JmsAccessor.convertJmsAccessException(JmsAccessor.java:168)
+	at org.springframework.jms.core.JmsTemplate.execute(JmsTemplate.java:469)
+	at org.springframework.jms.core.JmsTemplate.send(JmsTemplate.java:543)
+	at org.springframework.jms.core.JmsTemplate.send(JmsTemplate.java:529)
+	at wusc.edu.demo.mqtest.MQProducer.sendMessage(MQProducer.java:37)
+	at wusc.edu.demo.mqtest.MQProducerTest.main(MQProducerTest.java:32)
+Caused by: javax.jms.JMSException: Error while attempting to add new Connection to the pool
+	at org.apache.activemq.jms.pool.PooledConnectionFactory.createJmsException(PooledConnectionFactory.java:267)
+	at org.apache.activemq.jms.pool.PooledConnectionFactory.createConnection(PooledConnectionFactory.java:226)
+	at org.apache.activemq.jms.pool.PooledConnectionFactory.createConnection(PooledConnectionFactory.java:205)
+	at org.springframework.jms.connection.SingleConnectionFactory.doCreateConnection(SingleConnectionFactory.java:342)
+	at org.springframework.jms.connection.SingleConnectionFactory.initConnection(SingleConnectionFactory.java:288)
+	at org.springframework.jms.connection.SingleConnectionFactory.createConnection(SingleConnectionFactory.java:225)
+	at org.springframework.jms.support.JmsAccessor.createConnection(JmsAccessor.java:184)
+	at org.springframework.jms.core.JmsTemplate.execute(JmsTemplate.java:456)
+	... 4 more
+Caused by: javax.jms.JMSException: Could not connect to broker URL: tcp://http://192.168.220.128:61616. Reason: java.lang.IllegalArgumentException: port out of range:-1
+	at org.apache.activemq.util.JMSExceptionSupport.create(JMSExceptionSupport.java:36)
+	at org.apache.activemq.ActiveMQConnectionFactory.createActiveMQConnection(ActiveMQConnectionFactory.java:360)
+	at org.apache.activemq.ActiveMQConnectionFactory.createActiveMQConnection(ActiveMQConnectionFactory.java:305)
+	at org.apache.activemq.ActiveMQConnectionFactory.createConnection(ActiveMQConnectionFactory.java:245)
+	at org.apache.activemq.jms.pool.PooledConnectionFactory.createConnection(PooledConnectionFactory.java:276)
+	at org.apache.activemq.jms.pool.PooledConnectionFactory$1.makeObject(PooledConnectionFactory.java:108)
+	at org.apache.activemq.jms.pool.PooledConnectionFactory$1.makeObject(PooledConnectionFactory.java:88)
+	at org.apache.commons.pool.impl.GenericKeyedObjectPool.addObject(GenericKeyedObjectPool.java:1748)
+	at org.apache.activemq.jms.pool.PooledConnectionFactory.createConnection(PooledConnectionFactory.java:222)
+	... 10 more
+Caused by: java.lang.IllegalArgumentException: port out of range:-1
+	at java.net.InetSocketAddress.checkPort(InetSocketAddress.java:143)
+	at java.net.InetSocketAddress.<init>(InetSocketAddress.java:188)
+	at org.apache.activemq.transport.tcp.TcpTransport.connect(TcpTransport.java:479)
+	at org.apache.activemq.transport.tcp.TcpTransport.doStart(TcpTransport.java:464)
+	at org.apache.activemq.util.ServiceSupport.start(ServiceSupport.java:55)
+	at org.apache.activemq.transport.AbstractInactivityMonitor.start(AbstractInactivityMonitor.java:138)
+	at org.apache.activemq.transport.TransportFilter.start(TransportFilter.java:58)
+	at org.apache.activemq.transport.WireFormatNegotiator.start(WireFormatNegotiator.java:72)
+	at org.apache.activemq.transport.TransportFilter.start(TransportFilter.java:58)
+	at org.apache.activemq.transport.TransportFilter.start(TransportFilter.java:58)
+	at org.apache.activemq.ActiveMQConnectionFactory.createActiveMQConnection(ActiveMQConnectionFactory.java:340)
+	... 17 more
+[INFO ][20171224 08:57:46,709][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@47ef968d: startup date [Sun Dec 24 08:57:46 CST 2017]; root of context hierarchy
+[INFO ][20171224 08:57:46,928][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-context.xml]
+[INFO ][20171224 08:57:47,899][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-mq.xml]
+[INFO ][20171224 08:57:48,313][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq.properties]
+[INFO ][20171224 08:57:48,564][DefaultListableBeanFactory:598] Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@35aea049: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,mqProducer,org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.aop.config.internalAutoProxyCreator,targetConnectionFactory,pooledConnectionFactory,connectionFactory,activeMqJmsTemplate,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+[INFO ][20171224 08:57:49,297][SingleConnectionFactory:291] Established shared JMS Connection: PooledConnection { ConnectionPool[ActiveMQConnection {id=ID:lpz-PC-58208-1514077069053-1:1,clientId=null,started=false}] }
+[INFO ][20171224 08:57:51,889][MQProducerTest:39] ===>System.exit
+[INFO ][20171224 09:07:12,116][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@123772c4: startup date [Sun Dec 24 09:07:12 CST 2017]; root of context hierarchy
+[INFO ][20171224 09:07:12,196][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-context.xml]
+[INFO ][20171224 09:07:12,457][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-mq.xml]
+[INFO ][20171224 09:07:12,616][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq.properties]
+[INFO ][20171224 09:07:12,679][DefaultListableBeanFactory:598] Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@6acdbdf5: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,mqProducer,org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.aop.config.internalAutoProxyCreator,targetConnectionFactory,pooledConnectionFactory,connectionFactory,activeMqJmsTemplate,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+[INFO ][20171224 09:07:13,057][SingleConnectionFactory:291] Established shared JMS Connection: PooledConnection { ConnectionPool[ActiveMQConnection {id=ID:lpz-PC-58699-1514077632894-1:1,clientId=null,started=false}] }
+[INFO ][20171224 09:07:13,248][MQProducerTest:39] ===>System.exit
+[INFO ][20171224 09:13:48,458][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@47ef968d: startup date [Sun Dec 24 09:13:48 CST 2017]; root of context hierarchy
+[INFO ][20171224 09:13:48,562][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-context.xml]
+[INFO ][20171224 09:13:48,840][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-mq.xml]
+[INFO ][20171224 09:13:49,066][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq.properties]
+[INFO ][20171224 09:13:49,153][DefaultListableBeanFactory:598] Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@35aea049: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,mqProducer,org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.aop.config.internalAutoProxyCreator,targetConnectionFactory,pooledConnectionFactory,connectionFactory,activeMqJmsTemplate,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+[INFO ][20171224 09:13:49,895][SingleConnectionFactory:291] Established shared JMS Connection: PooledConnection { ConnectionPool[ActiveMQConnection {id=ID:lpz-PC-59297-1514078029610-1:1,clientId=null,started=false}] }
+[INFO ][20171224 09:13:50,265][MQProducerTest:39] ===>System.exit
+[INFO ][20171224 09:21:51,588][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@47ef968d: startup date [Sun Dec 24 09:21:51 CST 2017]; root of context hierarchy
+[INFO ][20171224 09:21:51,738][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-context.xml]
+[INFO ][20171224 09:21:52,519][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-mq.xml]
+[INFO ][20171224 09:21:56,039][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq.properties]
+[INFO ][20171224 09:21:56,352][DefaultListableBeanFactory:598] Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@35aea049: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,mqProducer,org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.aop.config.internalAutoProxyCreator,targetConnectionFactory,pooledConnectionFactory,connectionFactory,activeMqJmsTemplate,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+[INFO ][20171224 09:21:57,060][SingleConnectionFactory:291] Established shared JMS Connection: PooledConnection { ConnectionPool[ActiveMQConnection {id=ID:lpz-PC-59947-1514078516815-1:1,clientId=null,started=false}] }
+[INFO ][20171224 09:21:57,597][MQProducerTest:39] ===>System.exit
+[INFO ][20171224 09:23:27,916][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@47ef968d: startup date [Sun Dec 24 09:23:27 CST 2017]; root of context hierarchy
+[INFO ][20171224 09:23:28,022][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-context.xml]
+[INFO ][20171224 09:23:28,317][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-mq.xml]
+[INFO ][20171224 09:23:28,485][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq.properties]
+[INFO ][20171224 09:23:28,556][DefaultListableBeanFactory:598] Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@35aea049: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,mqProducer,org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.aop.config.internalAutoProxyCreator,targetConnectionFactory,pooledConnectionFactory,connectionFactory,activeMqJmsTemplate,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+[INFO ][20171224 09:23:28,951][SingleConnectionFactory:291] Established shared JMS Connection: PooledConnection { ConnectionPool[ActiveMQConnection {id=ID:lpz-PC-60044-1514078608805-1:1,clientId=null,started=false}] }
+[INFO ][20171224 09:23:29,643][MQProducerTest:39] ===>System.exit
+[INFO ][20171224 09:31:28,874][AbstractApplicationContext:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@47ef968d: startup date [Sun Dec 24 09:31:28 CST 2017]; root of context hierarchy
+[INFO ][20171224 09:31:28,957][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-context.xml]
+[INFO ][20171224 09:31:29,236][XmlBeanDefinitionReader:315] Loading XML bean definitions from class path resource [spring/spring-mq.xml]
+[INFO ][20171224 09:31:29,436][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq.properties]
+[INFO ][20171224 09:31:29,536][DefaultListableBeanFactory:598] Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@35aea049: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,mqProducer,org.springframework.context.support.PropertySourcesPlaceholderConfigurer#0,org.springframework.aop.config.internalAutoProxyCreator,targetConnectionFactory,pooledConnectionFactory,connectionFactory,activeMqJmsTemplate,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor]; root of factory hierarchy
+[INFO ][20171224 09:31:29,949][SingleConnectionFactory:291] Established shared JMS Connection: PooledConnection { ConnectionPool[ActiveMQConnection {id=ID:lpz-PC-60848-1514079089805-1:1,clientId=null,started=false}] }
+[INFO ][20171224 09:31:30,199][MQProducerTest:39] ===>System.exit
